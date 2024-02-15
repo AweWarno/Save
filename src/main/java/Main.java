@@ -1,3 +1,5 @@
+package src.main.java;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -22,13 +24,24 @@ public class Main {
         saveGame(file2.getAbsolutePath(), game2);
         saveGame(file3.getAbsolutePath(), game3);
 
+        File dir = new File("Games/savegames");
+        System.out.println("--- create file ---");
+        for(File file : dir.listFiles()) {
+            if(file.isFile()) System.out.println(file.getName());
+        }
+
         List<String> listToFile = new LinkedList<>();
         listToFile.add(file1.getAbsolutePath());
         listToFile.add(file2.getAbsolutePath());
         listToFile.add(file3.getAbsolutePath());
 
+
         File zip = new File("Games/savegames/zip.zip");
         zipFiles(zip.getAbsolutePath(), listToFile);
+        System.out.println("--- create zip ---");
+        for(File file : dir.listFiles()) {
+            if(file.isFile()) System.out.println(file.getName());
+        }
     }
 
     public static void saveGame(String pathToFile, GameProgress game) {

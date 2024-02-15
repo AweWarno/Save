@@ -1,3 +1,5 @@
+package src.main.java;
+
 import java.io.Serializable;
 
 public class GameProgress implements Serializable {
@@ -17,7 +19,7 @@ public class GameProgress implements Serializable {
 
     @Override
     public String toString() {
-        return "GameProgress{" +
+        return "src.main.java.GameProgress{" +
                 "health=" + health +
                 ", weapons=" + weapons +
                 ", lvl=" + lvl +
