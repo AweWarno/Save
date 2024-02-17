@@ -82,7 +82,6 @@ public class Main {
     }
 
     public static void deleteFile(File file) {
-        System.out.println("Удален файл – " + file.getName());
-        file.delete();
+        if(file.delete()) System.out.println("Удален файл – " + file.getName());
     }
 }
