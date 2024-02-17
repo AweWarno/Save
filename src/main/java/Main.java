@@ -15,6 +15,8 @@ public class Main {
         GameProgress game1 = new GameProgress(100, 10, 12, 1.1);
         GameProgress game2 = new GameProgress(111, 1110, 111, 11.11);
         GameProgress game3 = new GameProgress(222, 1220, 1221, 12.21);
+        File test = new File("Games/savegames");
+        test.mkdir();
 
         File file1 = new File("Games/savegames/save1.dat");
         File file2 = new File("Games/savegames/save2.dat");
@@ -25,10 +27,11 @@ public class Main {
         saveGame(file3.getAbsolutePath(), game3);
 
         File dir = new File("Games/savegames");
-        System.out.println("--- create file ---");
+        System.out.println("--- Состояние папки до архивирования ---");
         for(File file : dir.listFiles()) {
             if(file.isFile()) System.out.println(file.getName());
         }
+        System.out.println("--- --- ---");
 
         List<String> listToFile = new LinkedList<>();
         listToFile.add(file1.getAbsolutePath());
@@ -38,10 +41,11 @@ public class Main {
 
         File zip = new File("Games/savegames/zip.zip");
         zipFiles(zip.getAbsolutePath(), listToFile);
-        System.out.println("--- create zip ---");
+        System.out.println("--- Состояние папки после архивирования ---");
         for(File file : dir.listFiles()) {
             if(file.isFile()) System.out.println(file.getName());
         }
+        System.out.println("--- --- ---");
     }
 
     public static void saveGame(String pathToFile, GameProgress game) {
@@ -71,9 +75,14 @@ public class Main {
                 zip.write(buffer);
                 zip.closeEntry();
 
-                file.delete();
+                deleteFile(file);
             }
         } catch (Exception e) {
         }
+    }
+
+    public static void deleteFile(File file) {
+        System.out.println("Удален файл – " + file.getName());
+        file.delete();
     }
 }
