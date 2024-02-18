@@ -84,7 +84,7 @@ public class Main {
 
                 zip.write(buffer);
                 zip.closeEntry();
-
+                fileInputStream.close();
 
             }
         } catch (Exception e) {
