@@ -41,11 +41,21 @@ public class Main {
 
         File zip = new File("Games/savegames/zip.zip");
         zipFiles(zip.getAbsolutePath(), listToFile);
+
+
         System.out.println("--- Состояние папки после архивирования ---");
         for(File file : dir.listFiles()) {
             if(file.isFile()) System.out.println(file.getName());
         }
         System.out.println("--- --- ---");
+
+        System.out.println("--- Состояние папки после удаления ---");
+        deleteFile();
+        for(File file : dir.listFiles()) {
+            if(file.isFile()) System.out.println(file.getName());
+        }
+        System.out.println("--- --- ---");
+
     }
 
     public static void saveGame(String pathToFile, GameProgress game) {
@@ -75,13 +85,18 @@ public class Main {
                 zip.write(buffer);
                 zip.closeEntry();
 
-                deleteFile(file);
+
             }
         } catch (Exception e) {
         }
     }
 
-    public static void deleteFile(File file) {
-        if(file.delete()) System.out.println("Удален файл – " + file.getName());
+    public static void deleteFile() {
+        File temp = new File("Games/savegames");
+        for(File file : temp.listFiles()) {
+            if(file.getName().startsWith("save")) {
+                if(file.delete()) System.out.println("Удален файл: " + file.getName());
+            }
+        }
     }
 }
